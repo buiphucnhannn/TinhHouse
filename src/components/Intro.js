@@ -10,7 +10,7 @@ export default function Intro() {
       {/* Subtle blurred foreground leaf on left edge (matching design) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-12 sm:-left-10 -top-2 sm:top-1 z-0 h-36 w-36 sm:h-44 sm:w-44 opacity-35 blur-[0.5px] select-none mix-blend-multiply"
+        className="hidden md:block pointer-events-none absolute -left-10 top-1 z-0 h-44 w-44 opacity-35 blur-[0.5px] select-none mix-blend-multiply"
       >
         <Image
           src="/images/tropical_leaf.jpg"
