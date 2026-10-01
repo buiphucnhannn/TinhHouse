@@ -1,36 +1,72 @@
 "use client";
 
+import Image from "next/image";
 import Reveal from "./Reveal";
 
 export default function FinalCta({ onBooking }) {
   return (
-    <section className="bg-emerald-950 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-16 text-center md:px-6 md:py-24">
-        <Reveal>
-          <h2 className="mx-auto max-w-2xl text-3xl font-bold md:text-5xl">
-            Cuối tuần này,
-            <span className="text-amber-300"> về biển thở một hơi</span> nhé?
+    <section className="relative w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none py-6 sm:py-8 lg:py-10 bg-[#0E1F13]">
+      {/* Full-width background photograph with bounded height */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="/TinhHouse/AnhSP4.jpg"
+          alt="Tịnh House - Đến để nghỉ ngơi, ở lại để cảm nhận"
+          fill
+          loading="eager"
+          sizes="100vw"
+          className="object-cover object-center opacity-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/75" />
+      </div>
+
+      <div className="relative mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-14 xl:px-20 text-center z-10">
+        <Reveal variant="zoom-soft">
+          {/* Logo Emblem */}
+          <div className="mx-auto mb-3 sm:mb-3.5 relative h-11 w-11 sm:h-13 sm:w-13">
+            <Image
+              src="/TinhHouse/logo.png"
+              alt="Tịnh House"
+              fill
+              sizes="60px"
+              className="object-contain brightness-0 invert drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
+            />
+          </div>
+        </Reveal>
+
+        <Reveal variant="fade-up" delay={100}>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-[38px] xl:text-[40px] font-normal leading-[1.2] text-white tracking-wide">
+            Đến để nghỉ ngơi.<br />
+            Ở lại để cảm nhận.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Chỉ còn 3 phòng trống cho thứ 7 này. Nhắn TinhHouse giữ chỗ
-            trước 20h hôm nay để được tặng set trà chiều.
-          </p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        </Reveal>
+
+        <Reveal variant="fade-up" delay={200}>
+          <div className="mt-5 sm:mt-6 flex justify-center">
             <button
               onClick={onBooking}
-              className="rounded-full bg-amber-400 px-8 py-3.5 font-semibold text-emerald-950 transition hover:bg-amber-300"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3 text-sm sm:text-base font-medium text-stone-900 shadow-xl transition-all duration-300 hover:bg-stone-100 hover:shadow-2xl hover:scale-105 cursor-pointer"
             >
-              Giữ chỗ ngay — miễn phí hủy
+              <span>Đặt phòng ngay</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                <path
+                  d="M5 12h14M12 5l7 7-7 7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
-            <a
-              href="tel:0900000000"
-              className="rounded-full border border-white/30 px-8 py-3.5 font-semibold hover:bg-white/10"
-            >
-              Gọi: 0900 000 000
-            </a>
           </div>
         </Reveal>
       </div>
     </section>
   );
 }
+

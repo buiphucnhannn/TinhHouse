@@ -1,67 +1,163 @@
+"use client";
+
+import Image from "next/image";
 import Reveal from "./Reveal";
 
-const AREAS = [
-  { name: "Hiên trà", note: "30m² • sức chứa 12 người" },
-  { name: "Vườn lá", note: "võng • xích đu • thảm yoga" },
-  { name: "Bếp chung", note: "tự nấu • BBQ buổi tối" },
-  { name: "Bãi biển", note: "5 phút đi bộ • Bãi Trước" },
-];
+const MAP_SEARCH_URL =
+  "https://www.google.com/maps/search/?api=1&query=Qu%E1%BA%A3ng+B%E1%BB%91,+Qu%E1%BA%A3ng+Ph%C3%BA,+L%C6%B0%C6%A1ng+T%C3%A0i,+B%E1%BA%AFc+Ninh";
+
+const MAP_EMBED_URL =
+  "https://maps.google.com/maps?q=Qu%E1%BA%A3ng+B%E1%BB%91,+Qu%E1%BA%A3ng+Ph%C3%BA,+L%C6%B0%C6%A1ng+T%C3%A0i,+B%E1%BA%AFc+Ninh&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
 export default function BodyMap() {
   return (
-    <section id="ban-do" className="scroll-mt-20 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-        <Reveal className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-700">
-            Sơ đồ & Bản đồ
-          </p>
-          <h2 className="mx-auto mt-3 max-w-xl text-3xl font-bold text-emerald-950 md:text-4xl">
-            Nhà nhỏ, vườn rộng, biển gần
-          </h2>
-        </Reveal>
+    <section id="lien-he" className="relative scroll-mt-12 bg-[#FAF7F0] py-8 sm:py-12 lg:py-14 overflow-hidden">
+      {/* Nền ảnh sân vườn Tịnh House rõ nét tự nhiên */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <Image
+          src="/images/contact_courtyard_bg.jpg"
+          alt="Không gian sân vườn Tịnh House"
+          fill
+          priority
+          className="object-cover object-[center_60%]"
+        />
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <Reveal>
-            <div className="grid grid-cols-2 gap-4">
-              {AREAS.map((a) => (
-                <div
-                  key={a.name}
-                  className="rounded-2xl border border-emerald-950/10 bg-[#faf7ef] p-5"
-                >
-                  <h3 className="font-semibold text-emerald-950">{a.name}</h3>
-                  <p className="mt-1 text-sm text-emerald-950/60">{a.note}</p>
+        {/* Chuyển tiếp mờ êm ở mép dưới tiếp giáp với FinalCta */}
+        <div className="absolute bottom-0 inset-x-0 h-16 sm:h-24 bg-gradient-to-t from-[#0A160D] via-[#0A160D]/60 to-transparent" />
+      </div>
+
+      {/* Main Container - Scaled to max-w-[1440px] aligned precisely with upper sections */}
+      <div className="relative mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-14 xl:px-20 z-10">
+        <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-14">
+          
+          {/* Left Column: Info & Details Card */}
+          <div className="lg:col-span-5 relative z-10">
+            <Reveal variant="fade-right" className="h-full">
+              <div className="rounded-[22px] sm:rounded-[28px] bg-white/90 backdrop-blur-md p-5 sm:p-7 lg:p-8 border border-stone-200/90 shadow-[0_16px_40px_-15px_rgba(74,59,50,0.12)]">
+                <div className="inline-flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-stone-500">
+                    <path
+                      d="M12 21s-7-5.5-7-11.5a7 7 0 1 1 14 0C19 15.5 12 21 12 21Z"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="1.6" />
+                  </svg>
+                  <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-stone-500">
+                    VỊ TRÍ & LIÊN HỆ
+                  </span>
                 </div>
-              ))}
-              <div className="col-span-2 rounded-2xl bg-emerald-900 p-5 text-sm text-white">
-                📍 12/8 Trần Phú, P.1, TP. Vũng Tàu — hẻm yên tĩnh, ô tô đỗ
-                cách 50m, có người dẫn vào.
+
+                <h2 className="mt-2.5 font-serif text-3xl sm:text-4xl lg:text-[40px] font-normal leading-[1.2] text-[#22201D]">
+                  Hẹn bạn ở Tịnh
+                </h2>
+                <p className="mt-2 text-xs sm:text-sm text-stone-600 leading-relaxed max-w-sm">
+                  Một hành trình mới bắt đầu<br />
+                  từ một nơi thật yên.
+                </p>
+
+                {/* Contact list */}
+                <div className="mt-5 space-y-3">
+                  <div className="flex items-start gap-3 text-xs sm:text-sm text-stone-700">
+                    <div className="mt-0.5 shrink-0 text-stone-500">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M12 21s-7-5.5-7-11.5a7 7 0 1 1 14 0C19 15.5 12 21 12 21Z"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                        />
+                        <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="1.6" />
+                      </svg>
+                    </div>
+                    <span className="leading-relaxed">
+                      Thôn Quảng Bố, Xã Quảng Phú,<br />
+                      Huyện Lương Tài, Tỉnh Bắc Ninh, Việt Nam
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs sm:text-sm text-stone-700">
+                    <div className="shrink-0 text-stone-500">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                        />
+                      </svg>
+                    </div>
+                    <a href="tel:0389733426" className="font-medium hover:text-[#4A3B32] transition">
+                      0389 733 426
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs sm:text-sm text-stone-700">
+                    <div className="shrink-0 text-stone-500">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.6" />
+                        <path
+                          d="M13 10.5V8.5a1.5 1.5 0 0 1 1.5-1.5H16M11 10.5h4M13 10.5V17"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <span className="font-medium">Tịnh House Phú Quốc</span>
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <a
+                    href={MAP_SEARCH_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex items-center gap-2 rounded-full bg-[#4A3B32] px-6 py-2.5 text-xs sm:text-sm font-medium text-white shadow-sm transition-all duration-300 hover:bg-[#382b24] hover:shadow-md cursor-pointer"
+                  >
+                    <span>Chỉ đường đến Tịnh</span>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="transition-transform group-hover:translate-x-1"
+                    >
+                      <path
+                        d="M5 12h14M12 5l7 7-7 7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            {/* Khung bản đồ: thay iframe Google Maps thật khi có địa chỉ chính xác */}
-            <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-3xl bg-emerald-50 p-8 text-center">
-              <span className="text-5xl">🗺️</span>
-              <p className="mt-4 font-semibold text-emerald-950">
-                Nhúng Google Maps tại đây
-              </p>
-              <p className="mt-2 max-w-sm text-sm text-emerald-950/60">
-                Thay div này bằng{" "}
-                <code className="rounded bg-white px-1.5 py-0.5">
-                  &lt;iframe src="https://maps.google.com/..." /&gt;
-                </code>{" "}
-                khi bạn chốt địa chỉ.
-              </p>
-              <a
-                href="https://maps.google.com/?q=Vung+Tau"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 rounded-full bg-emerald-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-800"
-              >
-                Mở Google Maps
-              </a>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Google Maps Trực Quan Gọn Gàng, Thông Thoáng */}
+          <div className="lg:col-span-7 flex justify-center">
+            <Reveal variant="fade-left" delay={180} className="w-full">
+              <div className="relative h-[270px] sm:h-[340px] lg:h-[400px] w-full overflow-hidden rounded-[22px] sm:rounded-[28px] border border-stone-200/90 bg-[#E8EDE5] shadow-[0_16px_40px_-15px_rgba(74,59,50,0.12)]">
+                {/* Real Google Maps Embed - Giao diện gốc thoáng đãng, tương tác trực tiếp */}
+                <iframe
+                  title="Bản đồ vị trí Tịnh House Bắc Ninh"
+                  src={MAP_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full"
+                />
+              </div>
+            </Reveal>
+          </div>
+
         </div>
       </div>
     </section>

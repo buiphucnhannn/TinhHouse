@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-export default function BookingModal({ open, onClose }) {
+export default function BookingModal({ open, onClose, defaultRoom = "Garden Room" }) {
   const [sent, setSent] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(defaultRoom);
+
+  useEffect(() => {
+    if (defaultRoom) setSelectedRoom(defaultRoom);
+  }, [defaultRoom]);
 
   useEffect(() => {
     if (!open) setSent(false);
@@ -12,111 +17,121 @@ export default function BookingModal({ open, onClose }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // Khóa scroll nền khi mở modal
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open ]);
+  }, [open]);
 
   if (!open) return null;
 
   const submit = (e) => {
     e.preventDefault();
     setSent(true);
-    // TODO: gọi API/Zalo/Facebook tại đây. Hiện chỉ demo front-end.
   };
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl"
+        className="w-full max-w-[440px] max-h-[92vh] overflow-y-auto overflow-x-hidden rounded-2xl sm:rounded-3xl bg-[#FAF7F0] p-5 sm:p-7 shadow-2xl border border-stone-200 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {!sent ? (
           <>
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="text-xl font-bold text-emerald-950">
-                  Đặt phòng TinhHouse
-                </h3>
-                <p className="mt-1 text-sm text-emerald-950/60">
-                  Giữ chỗ miễn phí — xác nhận qua điện thoại trong 15 phút.
-                </p>
-              </div>
+            <div className="relative text-center">
               <button
                 onClick={onClose}
-                className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-900"
+                className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-stone-200/80 hover:bg-stone-300/80 text-stone-600 transition flex items-center justify-center text-xs sm:text-sm cursor-pointer"
                 aria-label="Đóng"
               >
                 ✕
               </button>
+              <h3 className="font-serif text-[20px] sm:text-2xl font-normal text-[#22201D] px-6 sm:px-8 tracking-tight sm:tracking-normal">
+                Đặt phòng Tịnh House
+              </h3>
+              <p className="mt-1.5 text-[12px] sm:text-xs text-stone-500 text-center leading-relaxed max-w-[300px] sm:max-w-none mx-auto">
+                Giữ chỗ miễn phí — nhân viên sẽ liên hệ xác nhận trong 15 phút.
+              </p>
             </div>
-            <form onSubmit={submit} className="mt-5 space-y-3">
-              <input
-                required
-                placeholder="Tên của bạn"
-                className="w-full rounded-xl border border-emerald-950/15 px-4 py-3 text-sm outline-none focus:border-emerald-700"
-              />
-              <input
-                required
-                placeholder="Số điện thoại"
-                pattern="[0-9+ ]{9,15}"
-                className="w-full rounded-xl border border-emerald-950/15 px-4 py-3 text-sm outline-none focus:border-emerald-700"
-              />
-              <div className="grid grid-cols-2 gap-3">
-                <label className="text-xs text-emerald-950/60">
-                  Nhận phòng
-                  <input
-                    required
-                    type="date"
-                    className="mt-1 w-full rounded-xl border border-emerald-950/15 px-3 py-2.5 text-sm text-emerald-950"
-                  />
-                </label>
-                <label className="text-xs text-emerald-950/60">
-                  Trả phòng
-                  <input
-                    required
-                    type="date"
-                    className="mt-1 w-full rounded-xl border border-emerald-950/15 px-3 py-2.5 text-sm text-emerald-950"
-                  />
-                </label>
+            <form onSubmit={submit} className="mt-6 space-y-3.5">
+              <div>
+                <label className="text-xs text-stone-600 block mb-1 font-medium">Họ và tên</label>
+                <input
+                  required
+                  placeholder="Nguyễn Văn A"
+                  className="w-full rounded-xl border border-stone-300/80 bg-white px-4 py-2.5 text-sm outline-none focus:border-[#4A3B32] transition"
+                />
               </div>
-              <select
-                className="w-full rounded-xl border border-emerald-950/15 px-4 py-3 text-sm"
-                defaultValue="Phòng Tĩnh — 650k/đêm"
-              >
-                <option>Phòng Tĩnh — 650k/đêm</option>
-                <option>Phòng Lặng — 850k/đêm</option>
-                <option>Nhà Riêng nguyên căn — 1.900k/đêm</option>
-              </select>
+
+              <div>
+                <label className="text-xs text-stone-600 block mb-1 font-medium">Số điện thoại</label>
+                <input
+                  required
+                  placeholder="0389 733 426"
+                  pattern="[0-9+ ]{9,15}"
+                  className="w-full rounded-xl border border-stone-300/80 bg-white px-4 py-2.5 text-sm outline-none focus:border-[#4A3B32] transition"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div className="min-w-0">
+                  <label className="text-xs text-stone-600 block mb-1 font-medium">Nhận phòng</label>
+                  <input
+                    required
+                    type="date"
+                    className="w-full min-w-0 rounded-xl border border-stone-300/80 bg-white px-2.5 sm:px-3 py-2 text-[12px] sm:text-xs text-stone-800 outline-none focus:border-[#4A3B32]"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <label className="text-xs text-stone-600 block mb-1 font-medium">Trả phòng</label>
+                  <input
+                    required
+                    type="date"
+                    className="w-full min-w-0 rounded-xl border border-stone-300/80 bg-white px-2.5 sm:px-3 py-2 text-[12px] sm:text-xs text-stone-800 outline-none focus:border-[#4A3B32]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs text-stone-600 block mb-1 font-medium">Loại phòng</label>
+                <select
+                  className="w-full rounded-xl border border-stone-300/80 bg-white px-4 py-2.5 text-sm text-stone-800 outline-none focus:border-[#4A3B32]"
+                  value={selectedRoom}
+                  onChange={(e) => setSelectedRoom(e.target.value)}
+                >
+                  <option value="Garden Room">Garden Room — View xanh, 2 khách</option>
+                  <option value="Cozy Room">Cozy Room — Thiết kế mộc mạc, 2 khách</option>
+                  <option value="Private Room">Private Room — Ban công yên tĩnh, 2 khách</option>
+                </select>
+              </div>
+
               <button
                 type="submit"
-                className="w-full rounded-full bg-amber-400 py-3.5 font-semibold text-emerald-950 hover:bg-amber-300"
+                className="w-full rounded-full bg-[#4A3B32] py-3 text-sm font-medium text-white shadow-md hover:bg-[#382b24] transition mt-2"
               >
-                Gửi yêu cầu giữ chỗ
+                Gửi yêu cầu đặt phòng
               </button>
             </form>
           </>
         ) : (
           <div className="py-6 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-2xl text-emerald-800">
               ✓
             </div>
-            <h3 className="mt-4 text-xl font-bold text-emerald-950">
+            <h3 className="mt-4 font-serif text-2xl font-normal text-[#22201D]">
               Đã nhận yêu cầu!
             </h3>
-            <p className="mt-2 text-sm text-emerald-950/70">
-              TinhHouse sẽ gọi lại xác nhận trong 15 phút (8h–21h).
-              Cảm ơn bạn đã chọn sự tĩnh lặng.
+            <p className="mt-2 text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xs mx-auto">
+              Tịnh House sẽ gọi lại xác nhận trong 15 phút.
+              Cảm ơn bạn đã lựa chọn một khoảng lặng giữa thiên nhiên.
             </p>
             <button
               onClick={onClose}
-              className="mt-5 rounded-full bg-emerald-900 px-6 py-2.5 text-sm font-semibold text-white"
+              className="mt-6 rounded-full bg-[#4A3B32] px-7 py-2.5 text-xs sm:text-sm font-medium text-white shadow hover:bg-[#382b24] transition"
             >
               Đóng
             </button>
@@ -126,3 +141,4 @@ export default function BookingModal({ open, onClose }) {
     </div>
   );
 }
+

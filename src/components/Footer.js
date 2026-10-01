@@ -1,51 +1,50 @@
+"use client";
+
 import Logo from "./Logo";
+import Reveal from "./Reveal";
 import { scrollToId } from "../utils/smoothScroll";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#021f18] text-white/70">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
-        <div>
+    <footer className="shrink-0 w-full bg-[#0A160D] text-stone-400 py-6 sm:py-7 lg:py-8 border-t border-white/10 z-20">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-14 xl:px-20">
+        <Reveal variant="fade-up">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 pb-5 sm:pb-6 border-b border-white/10">
           <Logo light />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed">
-            Homestay tĩnh lặng giữa lòng Vũng Tàu. Gỗ — lá — trà — biển.
-          </p>
-        </div>
-        <div className="text-sm">
-          <h4 className="font-semibold text-white">Liên hệ</h4>
-          <ul className="mt-3 space-y-2">
-            <li>📍 12/8 Trần Phú, Vũng Tàu</li>
-            <li>
-              📞 <a href="tel:0900000000" className="hover:text-white">0900 000 000</a>
-            </li>
-            <li>
-              ✉️ <a href="mailto:hello@tinhhouse.vn" className="hover:text-white">hello@tinhhouse.vn</a>
-            </li>
-          </ul>
-        </div>
-        <div className="text-sm">
-          <h4 className="font-semibold text-white">Đi nhanh</h4>
-          <div className="mt-3 flex flex-wrap gap-2">
+
+          {/* Quick links - scaled to text-sm sm:text-[15px] with generous spacing */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-8 lg:gap-10 text-xs sm:text-[15px] tracking-wide font-normal">
             {[
-              ["gioi-thieu", "Giới thiệu"],
-              ["khong-gian", "Không gian"],
-              ["dich-vu", "Dịch vụ"],
-              ["ban-do", "Bản đồ"],
+              ["trang-chu", "Trang chủ"],
+              ["ve-tinh", "Về Tịnh"],
+              ["phong-nghi", "Phòng nghỉ"],
+              ["trai-nghiem", "Trải nghiệm"],
+              ["hinh-anh", "Hình ảnh"],
+              ["lien-he", "Liên hệ"],
             ].map(([id, label]) => (
               <button
                 key={id}
                 onClick={() => scrollToId(id)}
-                className="rounded-full border border-white/15 px-4 py-2 hover:bg-white/10 hover:text-white"
+                className="transition hover:text-white cursor-pointer"
               >
                 {label}
               </button>
             ))}
           </div>
+
+          {/* Hotline & Address - scaled and formatted with clear hierarchy */}
+          <div className="text-xs sm:text-sm text-stone-400 text-center md:text-right">
+            <p>Hotline: <a href="tel:0389733426" className="text-white hover:underline font-medium">0389 733 426</a></p>
+            <p className="mt-1 text-stone-400/90 text-xs sm:text-[13px]">Thôn Quảng Bố, Quảng Phú, Lương Tài, Bắc Ninh</p>
+          </div>
         </div>
-      </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs">
-        © {new Date().getFullYear()} TinhHouse Vũng Tàu • Làm bằng Next.js + Tailwind
+
+        <div className="pt-4 sm:pt-5 text-center text-xs sm:text-[13px] text-stone-500 tracking-wider">
+          © {new Date().getFullYear()} Tịnh House. Nghỉ ngơi và sống chậm giữa thiên nhiên.
+        </div>
+        </Reveal>
       </div>
     </footer>
   );
 }
+
