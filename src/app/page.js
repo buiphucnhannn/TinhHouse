@@ -45,11 +45,11 @@ export default function Home() {
         <Services />
         <Ritual />
         <Testimonial />
-        <BodyMap />
-        
-        {/* Khối 2 phần cuối: FinalCta + Footer chiếm trọn vẹn đúng vùng màn hình dưới header ở 100%, có giới hạn max-h khi scale nhỏ */}
-        <div className="relative w-full h-[calc(100dvh-68px)] sm:h-[calc(100dvh-76px)] min-h-[480px] sm:min-h-[540px] max-h-[780px] sm:max-h-[840px] lg:max-h-[880px] xl:max-h-[920px] flex flex-col justify-between bg-[#0A160D] overflow-hidden">
-          <FinalCta onBooking={() => openBooking("Garden Room")} />
+        <FinalCta onBooking={() => openBooking("Garden Room")} />
+
+        {/* Khối BodyMap + Footer kết hợp vừa trọn vẹn 1 màn hình dưới Header khi lướt xuống cuối */}
+        <div className="relative w-full flex flex-col justify-between bg-[#0A160D] lg:h-[calc(100dvh-72px)] lg:min-h-[500px] lg:max-h-[880px] overflow-hidden">
+          <BodyMap />
           <Footer />
         </div>
       </main>

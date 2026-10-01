@@ -73,3 +73,19 @@ div[data-nextjs-dialog-overlay] {
   scrollbar-width: thin;
   scrollbar-color: #825A3E #F4EFE6;
 }
+
+/* Hiệu ứng chuyển lời cảm nhận mượt mà */
+@keyframes quoteFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-quote-fade {
+  animation: quoteFade 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}

@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function FinalCta({ onBooking }) {
   return (
-    <section className="relative w-full flex-1 flex flex-col justify-center items-center overflow-hidden select-none py-6 sm:py-8 lg:py-10 bg-[#0E1F13]">
+    <section className="relative w-full flex flex-col justify-center items-center overflow-hidden select-none py-16 sm:py-20 lg:py-28 min-h-[440px] sm:min-h-[500px] lg:min-h-[540px] bg-[#0E1F13]">
       {/* Full-width background photograph with bounded height */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -14,9 +14,13 @@ export default function FinalCta({ onBooking }) {
           fill
           loading="eager"
           sizes="100vw"
-          className="object-cover object-center opacity-50"
+          className="object-cover object-center opacity-45"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/75" />
+        {/* Lớp gradient tối để tôn vinh chữ và logo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-[#0A160D]" />
+
+        {/* Hiệu ứng làm mờ chuyển tiếp êm ái ở mép dưới tiếp giáp với BodyMap */}
+        <div className="absolute bottom-0 inset-x-0 h-10 sm:h-14 bg-gradient-to-t from-[#0A160D] via-[#0A160D]/80 to-transparent pointer-events-none z-10" />
       </div>
 
       <div className="relative mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-14 xl:px-20 text-center z-10">

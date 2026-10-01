@@ -16,13 +16,29 @@ export function scrollToId(id, customOffset) {
     if (!el) return;
 
     // Tính vị trí lý tưởng nhất để ngắm nhìn section:
-    // Header cố định cao ~72-76px, thêm khoảng đệm ~14-20px để tiêu đề section nằm ở vị trí thoải mái nhất
-    const headerOffset =
+    // Header cố định cao ~72-76px
+    let headerOffset =
       customOffset !== undefined
         ? customOffset
         : window.innerWidth >= 640
         ? 80
         : 72;
+
+    // Đối với "ve-tinh":
+    // Desktop: lướt xích xuống vào hẳn bên trong section (-24px) để khử hoàn toàn dải đen của Hero
+    // Mobile: căn chuẩn mép section (0px), kết hợp pt-22 để không bị che khuất huy hiệu "VỀ TỊNH HOUSE"
+    if (id === "ve-tinh") {
+      headerOffset = window.innerWidth >= 640 ? -24 : 0;
+    }
+
+    // Đối với "hinh-anh":
+    // Desktop: lướt xuống thêm một chút (~35px) để ngắm trọn vẹn dàn ảnh đẹp phía dưới
+    // Mobile: giữ nguyên chuẩn mặc định (72px)
+    if (id === "hinh-anh") {
+      if (window.innerWidth >= 640) {
+        headerOffset = 45; // lướt xuống thêm 35px so với 80px
+      }
+    }
 
     const elementRect = el.getBoundingClientRect();
     targetY = Math.max(0, elementRect.top + window.scrollY - headerOffset);

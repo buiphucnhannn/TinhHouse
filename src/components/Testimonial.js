@@ -10,24 +10,32 @@ const REVIEWS = [
       "Một nơi thật bình yên. Căn phòng đẹp hơn mình tưởng và rất nhiều cây xanh. Rất thích cảm giác được sống chậm ở đây!",
     author: "Linh",
     avatar: "/images/avatar_linh.jpg",
+    image: "/images/testimonial_banner.jpg",
+    alt: "Góc đọc sách an yên bên vòm cửa sổ hướng ra vườn cây xanh ngát",
   },
   {
     quote:
       "Không gian ở Tịnh đem lại cảm giác nhẹ nhõm hiếm có. Buổi sáng mở cửa ra đón nắng sớm và nhâm nhi tách cà phê, mọi mệt mỏi đều tan biến.",
     author: "Hương Giang",
     avatar: "/images/avatar_linh.jpg",
+    image: "/images/testimonial_giang.jpg",
+    alt: "Hiên nhà đón nắng sớm và thưởng thức cà phê ngắm mây trời",
   },
   {
     quote:
       "Mọi chi tiết trong phòng đều được chăm chút tỉ mỉ, mộc mạc mà vô cùng tinh tế. Chắc chắn sẽ quay trở lại mỗi khi cần nạp lại năng lượng.",
     author: "Tuấn Anh",
     avatar: "/images/avatar_linh.jpg",
+    image: "/images/testimonial_tuananh.jpg",
+    alt: "Không gian phòng ngủ mộc mạc ấm cúng tràn ngập ánh sáng tự nhiên",
   },
   {
     quote:
       "Chủ nhà chu đáo, các góc trong homestay chụp ảnh góc nào cũng thơ mộng. Một kỳ nghỉ trọn vẹn và an yên.",
     author: "Minh Trang",
     avatar: "/images/avatar_linh.jpg",
+    image: "/images/testimonial_minhtrang.jpg",
+    alt: "Góc thưởng trà và đọc sách thơ mộng bên khung cửa sổ sân vườn",
   },
 ];
 
@@ -46,18 +54,30 @@ export default function Testimonial() {
         {/* Nửa trái tràn ra tận mép trái màn hình */}
         <div className="w-full lg:w-1/2 h-full bg-[#EFE8DC]" />
         
-        {/* Nửa phải tràn ra tận mép phải màn hình với ảnh nghệ thuật sắc nét, không mờ */}
+        {/* Nửa phải tràn ra tận mép phải màn hình với 4 ảnh tương ứng từng khách hàng (hiệu ứng chuyển mượt mà) */}
         <div className="hidden lg:block w-1/2 h-full relative overflow-hidden bg-stone-100">
-          <Image
-            src="/images/testimonial_banner.jpg"
-            alt="Không gian thư thái tại Tịnh House"
-            fill
-            sizes="50vw"
-            className="object-cover object-[center_40%] transition-transform duration-700 hover:scale-105"
-          />
+          {REVIEWS.map((rev, idx) => (
+            <div
+              key={idx}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                idx === current ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={rev.image}
+                alt={rev.alt}
+                fill
+                priority={idx === 0}
+                sizes="(min-width: 1024px) 50vw, 1px"
+                className={`object-cover object-[center_40%] transition-transform duration-1000 ease-out ${
+                  idx === current ? "scale-100" : "scale-105"
+                }`}
+              />
+            </div>
+          ))}
 
           {/* Đường cong mềm mại nối giữa nền kem (#EFE8DC) và ảnh - 1 đường cong duy nhất rõ ràng */}
-          <div className="absolute inset-y-0 -left-[1px] w-20 lg:w-28 xl:w-36 z-10 pointer-events-none">
+          <div className="absolute inset-y-0 -left-[1px] w-20 lg:w-28 xl:w-36 z-20 pointer-events-none">
             <svg
               viewBox="0 0 100 500"
               preserveAspectRatio="none"
@@ -117,7 +137,10 @@ export default function Testimonial() {
                     “
                   </span>
 
-                  <blockquote className="text-[15px] sm:text-lg lg:text-[19px] leading-relaxed text-stone-700 font-normal min-h-[68px] sm:min-h-[64px] text-center lg:text-left">
+                  <blockquote
+                    key={current}
+                    className="animate-quote-fade text-[15px] sm:text-lg lg:text-[19px] leading-relaxed text-stone-700 font-normal min-h-[68px] sm:min-h-[64px] text-center lg:text-left"
+                  >
                     {/* Dấu mở nháy trên mobile nằm ngay đầu câu văn */}
                     <span
                       aria-hidden
@@ -152,7 +175,7 @@ export default function Testimonial() {
                         className="object-cover object-center"
                       />
                     </div>
-                    <span className="text-sm sm:text-base font-medium text-[#22201D]">
+                    <span key={current} className="animate-quote-fade text-sm sm:text-base font-medium text-[#22201D]">
                       — {item.author} —
                     </span>
                   </div>
@@ -218,14 +241,26 @@ export default function Testimonial() {
             <div className="lg:hidden mt-6">
               <Reveal variant="zoom-soft">
                 <div className="relative h-[220px] sm:h-[280px] w-full overflow-hidden bg-stone-100 rounded-2xl shadow-sm">
-                  <Image
-                    src="/images/testimonial_banner.jpg"
-                    alt="Không gian thư thái tại Tịnh House"
-                    fill
-                    sizes="100vw"
-                    className="object-cover object-[center_40%]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  {REVIEWS.map((rev, idx) => (
+                    <div
+                      key={idx}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                        idx === current ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                      }`}
+                    >
+                      <Image
+                        src={rev.image}
+                        alt={rev.alt}
+                        fill
+                        priority={idx === 0}
+                        sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 80px), 1px"
+                        className={`object-cover object-[center_40%] transition-transform duration-1000 ease-out ${
+                          idx === current ? "scale-100" : "scale-105"
+                        }`}
+                      />
+                    </div>
+                  ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-20" />
                 </div>
               </Reveal>
             </div>

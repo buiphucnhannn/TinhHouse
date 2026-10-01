@@ -7,16 +7,16 @@ import { scrollToId } from "../utils/smoothScroll";
 
 const HERO_SLIDES = [
   {
-    src: "/TinhHouse/AnhSP2.jpg",
-    alt: "Không gian phòng ấm áp mộc mạc",
-    titleItalic: "Thức giấc cùng nắng sớm,",
-    titleSub: "lắng nghe tiếng lá xào xạc bên thềm nhà.",
-  },
-  {
     src: "/TinhHouse/AnhSp3.jpg",
     alt: "Ban công yên tĩnh hướng vườn xanh",
     titleItalic: "Tạm gác lại âu lo,",
     titleSub: "cho tâm hồn những phút giây an yên trọn vẹn.",
+  },
+  {
+    src: "/TinhHouse/AnhSP2.jpg",
+    alt: "Không gian phòng ấm áp mộc mạc",
+    titleItalic: "Thức giấc cùng nắng sớm,",
+    titleSub: "lắng nghe tiếng lá xào xạc bên thềm nhà.",
   },
   {
     src: "/TinhHouse/AnhSP.jpg",

@@ -6,7 +6,7 @@ import { scrollToId } from "../utils/smoothScroll";
 
 export default function Intro() {
   return (
-    <section id="ve-tinh" className="relative scroll-mt-12 bg-[#FAF7F0] py-12 sm:py-20 lg:py-28 overflow-hidden">
+    <section id="ve-tinh" className="relative scroll-mt-0 bg-[#FAF7F0] pt-22 pb-12 sm:py-20 lg:py-28 overflow-hidden">
       {/* Subtle blurred foreground leaf on left edge (matching design) */}
       <div
         aria-hidden
